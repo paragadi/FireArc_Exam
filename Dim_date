@@ -1,0 +1,17 @@
+CREATE OR REPLACE TABLE `nyc-firedep.Firedep.date_dim` AS
+WITH dates AS (
+  SELECT date
+  FROM UNNEST(GENERATE_DATE_ARRAY('2000-01-01', CURRENT_DATE())) AS date
+)
+SELECT
+  date,
+  EXTRACT(YEAR FROM date) AS year,
+  EXTRACT(MONTH FROM date) AS month,
+  EXTRACT(DAY FROM date) AS day,
+  EXTRACT(DAYOFWEEK FROM date) AS day_of_week,
+  EXTRACT(QUARTER FROM date) AS quarter,
+  EXTRACT(WEEK FROM date) AS week,
+  FORMAT_TIMESTAMP('%Y-%m', date) AS year_month
+FROM dates;
+
+

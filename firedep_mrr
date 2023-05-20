@@ -1,0 +1,8 @@
+--%sql in big query create fact mirror:
+
+
+create table nyc-firedep.Firedep.nyc_firedep_mrr as
+select * from nyc-firedep.Firedep.incident_landing_zone where insert_date =
+(select max(insert_date) from nyc-firedep.Firedep.incident_landing_zone)
+
+

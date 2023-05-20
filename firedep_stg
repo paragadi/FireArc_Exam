@@ -1,0 +1,27 @@
+--firedep stg
+
+insert into nyc-firedep.Firedep.nyc_firedep_stg 
+select 
+
+starfire_incident_id
+incident_datetime ,
+coalesce(alarm_box_number,9999) as alarm_box_number,
+alarm_box_borough,
+coalesce(alarm_box_location,'unknown')as alarm_box_location,
+coalesce(engines_assigned_quantity,0) as engines_assigned_quantity,
+coalesce(ladders_assigned_quantity,0) as ladders_assigned_quantity,
+coalesce(other_units_assigned_quantity,0) as other_units_assigned_quantity,
+zipcode,
+policeprecinct,
+citycouncildistrict,
+communitydistrict,
+communityschooldistrict,
+congressionaldistrict,
+first_on_scene_datetime
+
+--deal with nulls+ delete columns from dims(descriptions) and keep only measures and codes.
+
+
+from nyc-firedep.Firedep.nyc_firedep_mrr
+where incident_datetime > (select max(incident_datetime ) 
+from nyc-firedep.Firedep.nyc_firedep_stg)

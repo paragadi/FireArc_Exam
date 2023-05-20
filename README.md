@@ -12,25 +12,29 @@ Ingest data from NYC fire incident dispatch to bigquery
 
 4)ERD and modeling
 
-we can optimise the code using spark
 
-the clustered index for this api is the primary key called: starfire_incident_id
+modeling:
+we can optimise the code using spark
+* It can distribute the workload across a cluster of machines
+* Spark provides the ability to persist intermediate results in memory or disk
+the clustered index for the fact is the primary key called: starfire_incident_id
 
 we should partition the data by most filtered column which is the datetime of the incident
 
 in DWH i can do whatever aggregations i need like:
 
 Some of the aggregations I can do :
-SELECT COUNT(*) AS total_incidents
+select count(*) AS total_incidents
 FROM nyc-firedep.Firedep.nyc_firedep
 
-SELECT alarm_level_index_description, COUNT(*) AS incident_count
-FROM nyc-firedep.Firedep.nyc_firedep
-GROUP BY alarm_level_index_description
+select alarm_level_index_description, count(*) AS incident_count
+from nyc-firedep.Firedep.nyc_firedep
+group by alarm_level_index_description
 
-SELECT alarm_level_index_description, AVG(response_time_minutes) AS avg_response_time
-FROM nyc-firedep.Firedep.nyc_firedep
-GROUP BY alarm_level_index_description
+select alarm_level_index_description, avg(response_time_minutes) as avg_response_time
+from nyc-firedep.Firedep.nyc_firedep
+group by alarm_level_index_description
+
 
 
 

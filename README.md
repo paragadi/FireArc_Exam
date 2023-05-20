@@ -7,6 +7,7 @@ Ingest data from NYC fire incident dispatch to bigquery
 1)python ingestation of fact table
 
 2)creating tables in Big query
+
 3)sql for all layers
 
 4)ERD and modeling

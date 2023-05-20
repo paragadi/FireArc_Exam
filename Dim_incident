@@ -1,0 +1,31 @@
+--Dim incident
+drop table nyc-firedep.Firedep.incident_mrr;
+create table nyc-firedep.Firedep.incident_mrr
+cluster by  starfire_incident_id  as
+select distinct incident_borough,
+incident_classification,
+incident_classification_group,
+starfire_incident_id
+
+
+ from nyc-firedep.Firedep.incident_landing_zone 
+
+
+
+
+ --dwh
+create table nyc-firedep.Firedep.incident_dwh as select
+COALESCE(incident_borough,'unknown') as incident_borough ,
+coalesce(incident_classification,'unknown') as incident_classification,
+coalesce(incident_classification_group,'unknown') as incident_classification_group,
+starfire_incident_id
+from nyc-firedep.Firedep.incident_mrr
+
+ --dwh
+
+
+
+
+
+
+

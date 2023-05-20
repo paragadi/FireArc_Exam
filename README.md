@@ -21,7 +21,7 @@ the clustered index for the fact is the primary key called: starfire_incident_id
 
 we should partition the data by most filtered column which is the datetime of the incident
 
-in DWH i can do whatever aggregations i need like:
+in DWH i could have done in dwh fact , it all depands what is the final table we want to get:
 
 Some of the aggregations I can do :
 select count(*) AS total_incidents

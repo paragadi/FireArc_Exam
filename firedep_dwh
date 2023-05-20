@@ -1,0 +1,11 @@
+--create table nyc-firedep.Firedep.nyc_firedep_dwh as
+--select * from nyc-firedep.Firedep.nyc_firedep_mrr 
+--CLUSTER BY incident_datetime
+--create table nyc-firedep.Firedep.nyc_firedep_stg as
+--select * from nyc-firedep.Firedep.nyc_firedep_mrr
+--CLUSTER BY incident_datetime  
+
+insert into nyc-firedep.Firedep.nyc_firedep_dwh 
+select * from nyc-firedep.Firedep.nyc_firedep_stg
+where incident_datetime > (select max(incident_datetime ) 
+from nyc-firedep.Firedep.nyc_firedep_dwh)

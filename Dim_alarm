@@ -1,0 +1,38 @@
+--Dim Alarm
+drop table nyc-firedep.Firedep.alarm_mrr;
+create table nyc-firedep.Firedep.alarm_mrr 
+cluster by alarm_key
+as
+select distinct alarm_box_borough,
+concat(cast(alarm_box_number as string),incident_datetime) as alarm_key,
+alarm_box_number,
+incident_datetime,
+alarm_box_location,
+alarm_source_description_tx,
+alarm_level_index_description,
+highest_alarm_level,
+
+
+ from nyc-firedep.Firedep.incident_landing_zone; 
+  
+
+ --dwh
+create table nyc-firedep.Firedep.alarm_dwh as select
+COALESCE(alarm_box_borough,'unknown') as alarm_box_borough ,
+concat(cast(alarm_box_number as string),incident_datetime) as alarm_key,
+COALESCE(alarm_box_number,9999) as alarm_box_number,
+incident_datetime,
+COALESCE(alarm_box_location,'unknown')as alarm_box_location,
+COALESCE(alarm_source_description_tx,'unkonwn')as alarm_source_description_tx,
+COALESCE(alarm_level_index_description,'unknown') as alarm_level_index_description,
+COALESCE(highest_alarm_level,'unknown') as highest_alarm_level
+from nyc-firedep.Firedep.alarm_mrr
+
+ --dwh
+
+
+
+
+
+
+

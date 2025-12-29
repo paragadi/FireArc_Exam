@@ -1,3 +1,4 @@
+# Databricks Asset Bundle configuration
 bundle:
   name: test_cicd
 
@@ -5,28 +6,62 @@ include:
   - resources/*.yml
   - resources/*/*.yml
 
+# -----------------------------
+# Bundle variables (DECLARED)
+# -----------------------------
+variables:
+  # Optional: lets you pass the env config file path to notebooks if you want.
+  env_file:
+    description: "Repo path to env YAML (e.g., src/env/dev.yml)"
+
+  # Optional defaults (useful if you later decide to do DAB-native variables)
+  env:
+    description: "dev | test | prod"
+  project:
+    description: "project identifier"
+
+# -----------------------------
+# Targets / environments
+# -----------------------------
 targets:
+  # -----------------------------
+  # DEV (per user, in Shared)
+  # -----------------------------
   dev:
-    default: true
     mode: development
+    default: true
     workspace:
       host: https://dbc-9023e4df-1d3e.cloud.databricks.com
       root_path: /Workspace/Shared/test_cicd/dev/${workspace.current_user.userName}
     variables:
+      env: dev
+      project: test_cicd
       env_file: src/env/dev.yml
 
+  # -----------------------------
+  # TEST (shared folder)
+  # -----------------------------
   test:
     mode: development
     workspace:
       host: https://dbc-9023e4df-1d3e.cloud.databricks.com
       root_path: /Workspace/Shared/test_cicd/test
     variables:
+      env: test
+      project: test_cicd
       env_file: src/env/test.yml
 
+  # -----------------------------
+  # PROD (shared folder + run_as)
+  # -----------------------------
   prod:
     mode: production
     workspace:
       host: https://dbc-9023e4df-1d3e.cloud.databricks.com
       root_path: /Workspace/Shared/test_cicd/prod
+    run_as:
+      user_name: paragadi@gmail.com
     variables:
+      env: prod
+      project: test_cicd
       env_file: src/env/prod.yml

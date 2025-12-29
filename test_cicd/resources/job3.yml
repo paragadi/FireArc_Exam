@@ -5,7 +5,7 @@ resources:
       tasks:
         - task_key: hob4
           notebook_task:
-            notebook_path: ${workspace.root_path}/FireArc_Exam/test_cicd/notebooks/TFK/1-Bronze/test_notebook
+            notebook_path: ${workspace.root_path}/notebooks/TFK/1-Bronze/test_notebook
             source: WORKSPACE
             base_parameters:
                 env: ${bundle.target}

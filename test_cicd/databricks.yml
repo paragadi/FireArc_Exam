@@ -8,16 +8,25 @@ include:
 targets:
   dev:
     default: true
+    mode: development
     workspace:
       host: https://dbc-9023e4df-1d3e.cloud.databricks.com
       root_path: /Workspace/Shared/test_cicd/dev/${workspace.current_user.userName}
+    variables:
+      env_file: src/env/dev.yml
 
   test:
+    mode: development
     workspace:
       host: https://dbc-9023e4df-1d3e.cloud.databricks.com
       root_path: /Workspace/Shared/test_cicd/test
+    variables:
+      env_file: src/env/test.yml
 
   prod:
+    mode: production
     workspace:
       host: https://dbc-9023e4df-1d3e.cloud.databricks.com
       root_path: /Workspace/Shared/test_cicd/prod
+    variables:
+      env_file: src/env/prod.yml

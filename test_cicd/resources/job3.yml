@@ -1,0 +1,12 @@
+resources:
+  jobs:
+    Job3:
+      name: Job3
+      tasks:
+        - task_key: hob4
+          notebook_task:
+            notebook_path: ${workspace.root_path}/FireArc_Exam/test_cicd/notebooks/TFK/1-Bronze/test_notebook
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED

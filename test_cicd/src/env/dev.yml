@@ -1,0 +1,5 @@
+env: dev
+project: test_cicd
+uc_catalog: my_catalog_dev
+s3_raw_prefix: s3://my-dev-bucket/raw/
+api_base_url: https://example.dev.api

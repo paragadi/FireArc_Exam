@@ -1,0 +1,23 @@
+bundle:
+  name: test_cicd
+
+include:
+  - resources/*.yml
+  - resources/*/*.yml
+
+targets:
+  dev:
+    default: true
+    workspace:
+      host: https://dbc-9023e4df-1d3e.cloud.databricks.com
+      root_path: /Workspace/Shared/test_cicd/dev/${workspace.current_user.userName}
+
+  test:
+    workspace:
+      host: https://dbc-9023e4df-1d3e.cloud.databricks.com
+      root_path: /Workspace/Shared/test_cicd/test
+
+  prod:
+    workspace:
+      host: https://dbc-9023e4df-1d3e.cloud.databricks.com
+      root_path: /Workspace/Shared/test_cicd/prod

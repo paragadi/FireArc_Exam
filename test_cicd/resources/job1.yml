@@ -1,0 +1,12 @@
+resources:
+  jobs:
+    New_Job_Dec_29_2025_09_32_AM:
+      name: New Job Dec 29, 2025, 09:32 AM
+      tasks:
+        - task_key: job_Test
+          notebook_task:
+            notebook_path: /Workspace/Users/paragadi@gmail.com/FireArc_Exam/test_cicd/Notebooks/TFK/1-Bronze/test_notebook
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED

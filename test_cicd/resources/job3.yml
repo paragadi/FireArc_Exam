@@ -1,11 +1,11 @@
 resources:
   jobs:
     Job3:
-      name: Job3
+      name: Job3_${bundle.target}_${workspace.current_user.userName}
       tasks:
         - task_key: hob4
           notebook_task:
-            notebook_path: ${workspace.root_path}/notebooks/TFK/1-Bronze/test_notebook
+            notebook_path: ${workspace.root_path}/files/notebooks/TFK/1-Bronze/test_notebook
             source: WORKSPACE
             base_parameters:
                 env: ${bundle.target}

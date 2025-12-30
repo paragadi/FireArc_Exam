@@ -16,6 +16,8 @@ variables:
     description: "UC schema name"
   table_name:
     description: "Target table name"
+  job_name_suffix:
+    description: "Suffix for job names (used to avoid collisions in dev)"
 
 targets:
   dev:
@@ -30,9 +32,10 @@ targets:
       uc_catalog: my_catalog_dev
       uc_schema: dim
       table_name: dim_date
+      job_name_suffix: _${workspace.current_user.userName}
 
   test:
-    mode: development
+    mode: production
     workspace:
       host: https://dbc-9023e4df-1d3e.cloud.databricks.com
       root_path: /Workspace/Shared/test_cicd/test
@@ -42,6 +45,7 @@ targets:
       uc_catalog: my_catalog_test
       uc_schema: dim
       table_name: dim_date
+      job_name_suffix: ""
 
   prod:
     mode: production
@@ -56,3 +60,4 @@ targets:
       uc_catalog: my_catalog_prod
       uc_schema: dim
       table_name: dim_date
+      job_name_suffix: ""
